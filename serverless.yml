@@ -1,0 +1,15 @@
+service: heimdall
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  region: eu-west-1
+  stage: ${opt:stage, 'dev'} # default to dev
+  environment: ${file(./config/env.yml):${self:provider.stage}}
+
+plugins:
+  - serverless-offline
+
+functions:
+  - ${file(./producer-functions.yml)}
+  - ${file(./consumer-functions.yml)}

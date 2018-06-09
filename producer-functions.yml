@@ -1,0 +1,9 @@
+source:
+  handler: producers/producers.source
+  events:
+      - http: 'POST /'
+      - stream:
+          arn: arn:aws:kinesis:region:XXXXXX:stream/events 
+          batchSize: 100
+          startingPosition: LATEST
+          enabled: true

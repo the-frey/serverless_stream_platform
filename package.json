@@ -1,0 +1,20 @@
+{
+  "name": "serverless_stream_platform",
+  "version": "0.0.1",
+  "description": "A serverless stream data platform",
+  "dependencies": {
+    "aws-sdk": "^2.244.1",
+    "js-yaml": "^3.11.0",
+    "kinesalite": "^1.13.0",
+    "kinesis-client": "0.0.3",
+    "serverless": "^1.27.2"
+  },
+  "devDependencies": {
+    "@rabblerouser/local-kinesis-lambda-runner": "git+https://github.com/tarwn/local-kinesis-lambda-runner.git#package",
+    "concurrently": "^3.5.1",
+    "serverless-offline": "^3.23.0"
+  },
+  "scripts": {
+    "offline": "concurrently --names \"BOOT,KNSL,HTTP,HOSE\" -c \"bgBlue.bold,bgGreen.bold,bgGreen.bold,bgBlue.bold\" --kill-others-on-fail \"node utils/stream-setup.js\" \"kinesalite\" \"sls offline start\" \"node utils/local-firehose.js\""
+  }
+}
